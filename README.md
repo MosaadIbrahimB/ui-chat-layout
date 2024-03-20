@@ -1,16 +1,11 @@
-# tf
+# ui-chat-layout
+
 
 A new Flutter project.
 
 ## Getting Started
+![Screenshot_1710396708](https://github.com/MosaadIbrahimB/ui-chat-layout/assets/55346238/c9702ed3-a375-46f7-883e-7024c7fce029)
 
-This project is a starting point for a Flutter application.
+https://github.com/MosaadIbrahimB/ui-chat-layout/assets/55346238/f86d9afe-ac81-4289-a7f3-16d34a03aa59
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
