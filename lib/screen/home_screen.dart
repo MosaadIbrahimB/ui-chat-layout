@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:tf/screen/login_screen.dart';
 import '../const.dart';
 import '../widget/app_bar_model.dart';
 import '../widget/items_list_horizontal.dart';
 
-class MyHomePage extends StatefulWidget {
-   MyHomePage();
+class HomeScreen extends StatefulWidget {
+  HomeScreen();
+  static const  String routeName="HomeScreen";
  static ScrollController? scrollController =ScrollController();
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
-class _MyHomePageState extends State<MyHomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
 
   Widget build(BuildContext context) {
     return CustomScrollView(
-      controller: MyHomePage.scrollController,
+      controller: HomeScreen.scrollController,
       slivers: [
         SliverAppBar(
           toolbarHeight: 82,
+
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.camera_alt)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.edit_square))
+            IconButton(onPressed: () {
+              Navigator.pushReplacementNamed(context,LoginScreen.routeName);
+            }, icon: const Icon(Icons.logout))
           ],
           pinned: true,
           centerTitle: true,

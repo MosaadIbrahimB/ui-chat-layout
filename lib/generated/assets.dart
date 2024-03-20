@@ -10,6 +10,7 @@ class Assets {
   static const String imagesLogoGoogle = 'assets/images/logoGoogle.PNG';
   static const String imagesLogoKarem = 'assets/images/logoKarem.PNG';
   static const String imagesLogoQ = 'assets/images/logoQ.PNG';
+  static const String imagesMeta = 'assets/images/meta.png';
   static const String imagesMohmedKhaled = 'assets/images/mohmedKhaled.PNG';
   static const String imagesPicT = 'assets/images/picT.png';
   static const String imagesTala = 'assets/images/tala.PNG';

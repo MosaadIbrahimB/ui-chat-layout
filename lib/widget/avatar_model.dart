@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 class AvatarModel extends StatelessWidget {
   const AvatarModel({
     super.key,
-    this.imageName="assets/images/picT.png",this.radiusOne=24,this.radiusTwo=22
+    this.imageName="assets/images/logoEasyLearn.png",this.radiusOne=24,this.radiusTwo=22
   });
   final double ?radiusOne;
   final double ?radiusTwo;

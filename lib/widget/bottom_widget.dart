@@ -41,7 +41,7 @@ class BottomWidget extends StatelessWidget {
     );
   }
   toTopScreen(){
-    MyHomePage.scrollController?.animateTo(0, duration: const Duration(seconds: 1),
+    HomeScreen.scrollController?.animateTo(0, duration: const Duration(seconds: 1),
         curve: Curves.easeInOutSine);
   }
 }
