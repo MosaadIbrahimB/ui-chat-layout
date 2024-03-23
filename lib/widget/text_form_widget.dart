@@ -23,12 +23,7 @@ class TextFormWidget extends StatelessWidget {
 
 
         controller: textEditingController,
-        validator: (value) {
-          if (value == null || value.isEmpty) {
-            return "input anything";
-          }
-          return null;
-        },
+        validator: valid,
         style: const TextStyle(fontSize: 22),
         decoration: InputDecoration(
 

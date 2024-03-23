@@ -1,25 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tf/screen/login_screen.dart';
 
 import '../widget/text_form_widget.dart';
 import 'layout_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const String routeName = "HomeScreen";
+class CreateAccountScreen extends StatefulWidget {
+  static const String routeName = "CreateAccountScreen";
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  late bool _obscureText = true;
+class _CreateAccountScreenState extends State<CreateAccountScreen> {
+  late bool _obscurePassword = true;
+  late bool _obscureConformPassword = true;
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  TextEditingController rePassword = TextEditingController();
   var keyForm = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      //TODo Icon App and send to Talal
       backgroundColor: const Color(0xffebf4fd),
       body: Container(
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
@@ -47,16 +50,32 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormWidget(
                   label: const Text("Mobile number or email"),
                   textEditingController: email,
+                  valid: validName,
                 ),
                 SizedBox(height: size.height * .03),
                 TextFormWidget(
+                  valid: validPassword,
                   textEditingController: password,
                   label: const Text("Password"),
-                  obscureText: _obscureText,
+                  obscureText: _obscurePassword,
                   suffix: InkWell(
                       onTap: () {
                         setState(() {
-                          _obscureText = !_obscureText;
+                          _obscurePassword = !_obscurePassword;
+                        });
+                      },
+                      child: const Icon(Icons.visibility)),
+                ),
+                SizedBox(height: size.height * .02),
+                TextFormWidget(
+                  valid: validRePassword,
+                  textEditingController: rePassword,
+                  label: const Text("Conform Password"),
+                  obscureText: _obscureConformPassword,
+                  suffix: InkWell(
+                      onTap: () {
+                        setState(() {
+                          _obscureConformPassword = !_obscureConformPassword;
                         });
                       },
                       child: const Icon(Icons.visibility)),
@@ -72,45 +91,26 @@ class _LoginScreenState extends State<LoginScreen> {
                       var currentState = keyForm.currentState;
                       if (currentState != null) {
                         if (currentState.validate()) {
-                          Navigator.pushReplacementNamed(context, LayOutScreen.routeName);
+                          Navigator.pushReplacementNamed(context, LoginScreen.routeName);
                         }
                       }
 
                     },
                     child: const Text(
-                      "Log in",
+                      "sign up",
                       style: TextStyle(color: Colors.white, fontSize: 22),
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent, elevation: 0),
-                  onPressed: () {},
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                  },
                   child: const Text(
-                    "Forgot password?",
+                    "Login screen?",
                     style: TextStyle(color: Colors.black, fontSize: 16),
                   ),
                 ),
-                SizedBox(height: size.height * .13),
-                SizedBox(
-                  width: size.width,
-                  height: 45,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                        side: const BorderSide(
-                            color: Color(0xff0064e0), width: 1.8)),
-                    onPressed: () {},
-                    child: const Text(
-                      "Create  new account",
-                      style: TextStyle(color: Color(0xff0064e0), fontSize: 18),
-                    ),
-                  ),
-                ),
-                SizedBox(
-                    height: size.height * .1,
-                    width: size.width * .3,
-                    child: Image.asset("assets/images/meta.png"))
               ],
             ),
           ),
@@ -118,4 +118,50 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+
+
+ String? validName(String ?name){
+    name=email.text;
+    if (name == null || name.trim().isEmpty) {
+      return ' Enter  correct value';
+    }
+
+    return null;
+  }
+
+
+
+  String?  validPassword(String? text) {
+    text=password.text;
+    String msgError = ' Enter your correct Password';
+    if (text == null || text.trim().isEmpty) {
+      return " $msgError ";
+    }
+    if (text.length < 6) {
+      return "$msgError greater than 6 char";
+    }
+    return null;
+  }
+
+
+
+ String ? validRePassword  (String? text) {
+  String passwordText=password.text;
+   text=rePassword.text;
+    String msgError = ' Enter your correct Password';
+    if (text == null || text.trim().isEmpty) {
+      // print('ll');
+      return " $msgError ";
+    }
+    if (text.length < 6) {
+      return "$msgError greater than 6 char";
+    }
+
+    if (text != passwordText) {
+      return " Password not match";
+    }
+    return null;
+
+   }
+
 }

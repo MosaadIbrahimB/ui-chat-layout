@@ -1,57 +1,70 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:tf/screen/layout_screen.dart';
+import 'package:flutter/services.dart';
 
-
+import 'login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-static const nameRoute="SplashScreen";
+  static const routeName = "SplashScreen";
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-@override
+  @override
   void initState() {
-Timer(const Duration(seconds: 3), () {
-  Navigator.of(context).push(MaterialPageRoute(builder: (c)=>LayOutScreen()));
-});
+    Timer(const Duration(seconds: 5), () {
+      Navigator.of(context).pushReplacementNamed(LoginScreen.routeName);
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ));
     return Scaffold(
-      backgroundColor: Color(0xff001501),
-body: Center(
-  child: Column(
-    mainAxisSize: MainAxisSize.min,
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Container(
-        width: 230,
-        height: 230,
-        decoration: BoxDecoration(
-          border: Border.all(color: Color(0xff0ca9d5),width: 2),
-          borderRadius: BorderRadiusDirectional.circular(250),
-          image:const DecorationImage(image: AssetImage("assets/images/logoEasyLearn.png")) ,
+      extendBodyBehindAppBar: true,
+      // backgroundColor: const Color(0xff001501),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .4,
+            ),
+            Container(
+              width: 230,
+              height: MediaQuery.of(context).size.height * .1,
+              alignment: Alignment.center,
+              child: const Icon(
+                Icons.facebook_outlined,
+                size: 130,
+                color: Colors.blueAccent,
+              ),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .4,
+            ),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
+                width: 70,
+                child: Column(
+                  children: [
+                    const Text("from Meta"),
+                    Image.asset(
+                      "assets/images/meta.png",
+                      color: Colors.blue,
+                    ),
+                  ],
+                ))
+          ],
         ),
-
-
-          ),
-      SizedBox(height: 25,),
-      ElevatedButton(onPressed: (){
-        Navigator.of(context).push(MaterialPageRoute(builder: (c)=>LayOutScreen()));
-      },
-          style: ElevatedButton.styleFrom(backgroundColor: Color(0xff095167)),
-
-          child: Icon(Icons.navigate_next,size:50,color: Colors.white,))
-    ],
-  ),
-),
+      ),
     );
   }
 }

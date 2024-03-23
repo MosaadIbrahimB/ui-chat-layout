@@ -1,5 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:tf/screen/create_account_screen.dart';
 import '../widget/text_form_widget.dart';
 import 'layout_screen.dart';
 
@@ -19,7 +20,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      //TODo Icon App and send to Talal
       backgroundColor: const Color(0xffebf4fd),
       body: Container(
         padding: const EdgeInsetsDirectional.symmetric(horizontal: 20),
@@ -47,9 +47,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 TextFormWidget(
                   label: const Text("Mobile number or email"),
                   textEditingController: email,
+valid: validName,
                 ),
                 SizedBox(height: size.height * .03),
                 TextFormWidget(
+                  valid: validPassword,
                   textEditingController: password,
                   label: const Text("Password"),
                   obscureText: _obscureText,
@@ -83,9 +85,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent, elevation: 0),
+                TextButton(
                   onPressed: () {},
                   child: const Text(
                     "Forgot password?",
@@ -100,7 +100,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: OutlinedButton.styleFrom(
                         side: const BorderSide(
                             color: Color(0xff0064e0), width: 1.8)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).pushReplacementNamed(CreateAccountScreen.routeName);
+                    },
                     child: const Text(
                       "Create  new account",
                       style: TextStyle(color: Color(0xff0064e0), fontSize: 18),
@@ -109,8 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(
                     height: size.height * .1,
-                    width: size.width * .3,
-                    child: Image.asset("assets/images/meta.png"))
+                    width: size.width * .25,
+                    child: Image.asset("assets/images/meta.png",color: Colors.blue,))
               ],
             ),
           ),
@@ -118,4 +120,24 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
+  String? validName(String ?name){
+    name=email.text;
+    if (name == null || name.trim().isEmpty) {
+      return ' Enter  correct value';
+    }
+
+    return null;
+  }
+  String?  validPassword(String? text) {
+    text=password.text;
+    String msgError = ' Enter your correct Password';
+    if (text == null || text.trim().isEmpty) {
+      return " $msgError ";
+    }
+    if (text.length < 6) {
+      return "$msgError greater than 6 char";
+    }
+    return null;
+  }
+
 }
